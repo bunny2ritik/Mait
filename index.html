@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAIT - Join Our Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,119 +12,268 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-blue: #1e40af;
+            --primary-red: #dc2626;
+            --gradient-primary: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3b82f6 100%);
+            --gradient-accent: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --surface: rgba(255, 255, 255, 0.95);
+            --shadow-soft: 0 25px 50px rgba(0, 0, 0, 0.15);
+            --shadow-strong: 0 35px 70px rgba(0, 0, 0, 0.25);
+            --border-radius: 24px;
+            --animation-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3b82f6 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gradient-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
 
+        /* Enhanced Background Effects */
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.6;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.4), rgba(59, 130, 246, 0.1));
+            top: 10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.3), rgba(220, 38, 38, 0.1));
+            top: 60%;
+            right: -15%;
+            animation-delay: 3s;
+        }
+
+        .orb-3 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3), rgba(168, 85, 247, 0.1));
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        /* Main Container */
         .container {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            padding: 40px;
-            max-width: 600px;
+            background: var(--surface);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-strong);
+            padding: 50px 40px;
+            max-width: 650px;
             width: 100%;
             text-align: center;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+            transform: perspective(1000px) rotateX(2deg);
+            transition: all 0.6s var(--animation-spring);
+        }
+
+        .container:hover {
+            transform: perspective(1000px) rotateX(0deg) translateY(-10px);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Logo Section Enhancement */
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
         }
 
         .college-logo {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 180px;
+            height: 180px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
             overflow: hidden;
             background: white;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.5s var(--animation-spring);
+            position: relative;
         }
 
-        .logo-svg {
-            width: 180px;
-            height: 180px;
+        .college-logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.8s;
         }
 
+        .college-logo:hover::before {
+            transform: translateX(100%);
+        }
+
+        .college-logo:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .logo-image {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .college-logo:hover .logo-image {
+            transform: scale(1.1);
+        }
+
+        /* Header Section */
         .header-section {
-            margin-bottom: 40px;
+            margin-bottom: 45px;
+            position: relative;
         }
 
         .college-name {
-            font-size: 32px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #1e40af, #dc2626);
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+            position: relative;
+        }
+
+        .college-name::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-red));
+            border-radius: 2px;
         }
 
         .sanskrit-motto {
-            font-size: 16px;
-            color: #374151;
+            font-size: 18px;
+            color: var(--text-secondary);
             font-style: italic;
-            margin-bottom: 15px;
-            font-family: 'Times New Roman', serif;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         .subtitle {
-            color: #6b7280;
-            font-size: 18px;
+            color: var(--text-secondary);
+            font-size: 20px;
             font-weight: 500;
+            opacity: 0.9;
         }
 
+        /* Welcome Message Enhancement */
         .welcome-message {
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 40px;
-            border-left: 5px solid #dc2626;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 22px;
+            padding: 35px 30px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(30, 64, 175, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-red), var(--primary-blue));
+            border-radius: 0 3px 3px 0;
         }
 
         .welcome-title {
-            color: #1f2937;
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .welcome-text {
-            color: #4b5563;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .social-links {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
-
-        .social-title {
-            color: #1f2937;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 30px;
+            color: var(--text-primary);
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        .welcome-text {
+            color: var(--text-secondary);
+            font-size: 17px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* Social Links Enhancement */
+        .social-links {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .social-title {
+            color: var(--text-primary);
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .social-title::before,
+        .social-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
+            max-width: 80px;
         }
 
         .social-link {
@@ -131,13 +281,13 @@
             align-items: center;
             justify-content: flex-start;
             background: white;
-            margin: 20px 0;
-            padding: 20px 25px;
-            border-radius: 18px;
+            margin: 25px 0;
+            padding: 25px 30px;
+            border-radius: 20px;
             text-decoration: none;
-            color: #1f2937;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            color: var(--text-primary);
+            transition: all 0.4s var(--animation-spring);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             border: 2px solid transparent;
             position: relative;
             overflow: hidden;
@@ -150,8 +300,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
         }
 
         .social-link:hover::before {
@@ -159,244 +309,280 @@
         }
 
         .social-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
 
+        /* Platform-specific styling */
         .linkedin {
-            border-left: 5px solid #0077b5;
+            border-left: 6px solid #0077b5;
         }
-
         .linkedin:hover {
             background: linear-gradient(135deg, #f8faff, #e6f3ff);
             border-color: #0077b5;
         }
 
         .facebook {
-            border-left: 5px solid #1877f2;
+            border-left: 6px solid #1877f2;
         }
-
         .facebook:hover {
             background: linear-gradient(135deg, #f8faff, #e8f4fd);
             border-color: #1877f2;
         }
 
         .instagram {
-            border-left: 5px solid #e4405f;
+            border-left: 6px solid #e4405f;
         }
-
         .instagram:hover {
             background: linear-gradient(135deg, #fdf2f8, #fce7f3);
             border-color: #e4405f;
         }
 
+        /* Social Icons Enhancement */
         .social-icon {
-            width: 50px;
-            height: 50px;
-            margin-right: 20px;
-            border-radius: 12px;
+            width: 60px;
+            height: 60px;
+            margin-right: 25px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 32px;
             flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover .social-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .linkedin .social-icon {
             background: linear-gradient(135deg, #0077b5, #005885);
             color: white;
+            box-shadow: 0 8px 25px rgba(0, 119, 181, 0.3);
         }
 
         .facebook .social-icon {
             background: linear-gradient(135deg, #1877f2, #0d47a1);
             color: white;
+            box-shadow: 0 8px 25px rgba(24, 119, 242, 0.3);
         }
 
         .instagram .social-icon {
             background: linear-gradient(135deg, #e4405f, #c13584, #833ab4);
             color: white;
+            box-shadow: 0 8px 25px rgba(228, 64, 95, 0.3);
         }
 
+        /* Platform Info */
         .platform-info {
             flex: 1;
             text-align: left;
         }
 
         .platform-name {
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 5px;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 8px;
+            letter-spacing: -0.2px;
         }
 
         .platform-desc {
-            font-size: 14px;
-            color: #6b7280;
+            font-size: 15px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            line-height: 1.4;
         }
 
         .follow-count {
-            font-size: 12px;
+            font-size: 13px;
             color: #9ca3af;
             background: #f3f4f6;
-            padding: 4px 10px;
-            border-radius: 20px;
-            margin-top: 8px;
+            padding: 6px 14px;
+            border-radius: 25px;
+            margin-top: 10px;
             display: inline-block;
+            font-weight: 500;
         }
 
+        /* CTA Section Enhancement */
         .cta-section {
-            margin-top: 40px;
-            padding: 25px;
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-            border-radius: 20px;
+            margin-top: 50px;
+            padding: 35px 30px;
+            background: linear-gradient(135deg, var(--primary-blue), #3b82f6, var(--primary-red));
+            border-radius: 22px;
             color: white;
-        }
-
-        .cta-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .cta-text {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+            position: relative;
             overflow: hidden;
         }
 
-        .floating-element {
+        .cta-section::before {
+            content: '';
             position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s infinite;
         }
 
-        .floating-element:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
+        .cta-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
         }
 
-        .floating-element:nth-child(2) {
-            width: 60px;
-            height: 60px;
-            top: 20%;
-            right: 15%;
-            animation-delay: 2s;
+        .cta-text {
+            font-size: 16px;
+            opacity: 0.95;
+            font-weight: 400;
+            line-height: 1.6;
+            position: relative;
         }
 
-        .floating-element:nth-child(3) {
-            width: 100px;
-            height: 100px;
-            bottom: 15%;
-            left: 20%;
-            animation-delay: 4s;
+        /* Animations */
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(40px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+            }
+            50% { 
+                transform: translateY(-30px) rotate(5deg); 
+            }
         }
 
-        @media (max-width: 640px) {
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .container {
-                padding: 25px;
-                margin: 10px;
+                padding: 35px 25px;
+                margin: 15px;
                 border-radius: 20px;
+                transform: none;
             }
             
-            .college-name {
-                font-size: 24px;
+            .container:hover {
+                transform: translateY(-5px);
+            }
+            
+            .logo-section {
+                gap: 20px;
             }
             
             .college-logo {
-                width: 150px;
-                height: 150px;
+                width: 140px;
+                height: 140px;
             }
             
-            .logo-svg {
-                width: 130px;
-                height: 130px;
+            .logo-image {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .college-name {
+                font-size: 32px;
             }
             
             .social-link {
-                padding: 15px 20px;
+                padding: 20px 25px;
             }
             
             .social-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-                margin-right: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 26px;
+                margin-right: 20px;
             }
             
             .platform-name {
-                font-size: 16px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-section {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .college-logo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .logo-image {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .college-name {
+                font-size: 28px;
+            }
+            
+            .welcome-message,
+            .cta-section {
+                padding: 25px 20px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .background-effects {
+                display: none;
+            }
+            
+            .container {
+                box-shadow: none;
+                transform: none;
+            }
+        }
+
+        /* Accessibility */
+        .social-link:focus {
+            outline: 3px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 <body>
-    <div class="floating-elements">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
+    <div class="background-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
     </div>
 
     <div class="container">
-        <div class="college-logo">
-            <svg class="logo-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                <!-- Red oval background -->
-                <ellipse cx="200" cy="160" rx="180" ry="100" fill="#dc2626"/>
-                
-                <!-- Atomic symbol in white -->
-                <g transform="translate(200,160)" stroke="white" stroke-width="8" fill="none">
-                    <!-- Electron orbits -->
-                    <ellipse rx="60" ry="25" />
-                    <ellipse rx="60" ry="25" transform="rotate(60)" />
-                    <ellipse rx="60" ry="25" transform="rotate(120)" />
-                    
-                    <!-- Nucleus -->
-                    <circle r="8" fill="white" />
-                </g>
-                
-                <!-- MAHARAJA AGRASEN text (curved at top) -->
-                <defs>
-                    <path id="top-curve" d="M 50 100 A 150 150 0 0 1 350 100" />
-                </defs>
-                <text font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1e40af">
-                    <textPath href="#top-curve" startOffset="50%" text-anchor="middle">
-                        MAHARAJA AGRASEN
-                    </textPath>
-                </text>
-                
-                <!-- INSTITUTE OF TECHNOLOGY text (curved at bottom) -->
-                <defs>
-                    <path id="bottom-curve" d="M 50 220 A 150 150 0 0 0 350 220" />
-                </defs>
-                <text font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1e40af">
-                    <textPath href="#bottom-curve" startOffset="50%" text-anchor="middle">
-                        INSTITUTE OF TECHNOLOGY
-                    </textPath>
-                </text>
-                
-                <!-- MAIT -->
-                <rect x="20" y="280" width="360" height="80" fill="#1e40af"/>
-                <text x="200" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white">MAIT</text>
-                
-                <!-- Sanskrit motto -->
-                <text x="200" y="385" text-anchor="middle" font-family="Devanagari, sans-serif" font-size="24" fill="#1f2937">उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः</text>
-            </svg>
+        <div class="logo-section">
+            <div class="college-logo">
+                <img src="file:///Users/bunny2ritik/Downloads/Mait_Logo-2.png" class="logo-image" alt="MAIT Logo 1" />
+            </div>
+            <div class="college-logo">
+                <img src="file:///Users/bunny2ritik/Downloads/IMG_4483.jpg" class="logo-image" alt="MAIT Logo 2" />
+            </div>
         </div>
 
         <div class="header-section">
@@ -406,101 +592,174 @@
         </div>
 
         <div class="welcome-message">
-            <div class="welcome-title">🎓 Dear Faculty Members & Students</div>
+            <div class="welcome-title">
+                <span>🎓</span> Dear Faculty Members & Students
+            </div>
             <div class="welcome-text">
-                Join our official social media platforms to stay updated and connected. 
-                Follow us to boost our community engagement and be part of the MAIT family!
+                Join our official social media platforms to stay updated and connected with the MAIT community. 
+                Follow us to boost our engagement, share in our achievements, and be part of our growing digital family!
             </div>
         </div>
 
         <div class="social-links">
             <div class="social-title">
-                🌟 Join Our Community
+                <span>🌟 Join Our Community</span>
             </div>
             
-            <a href="https://www.linkedin.com/company/it-mait-delhi/" class="social-link linkedin" target="_blank">
+            <a href="https://www.linkedin.com/company/it-mait-delhi/" class="social-link linkedin" target="_blank" rel="noopener noreferrer">
                 <div class="social-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                     </svg>
                 </div>
                 <div class="platform-info">
                     <div class="platform-name">LinkedIn</div>
-                    <div class="platform-desc">Professional Updates & Career Opportunities</div>
+                    <div class="platform-desc">Professional Updates, Career Opportunities & Industry Connections</div>
                     <div class="follow-count">Connect with us professionally</div>
                 </div>
             </a>
 
-            <a href="https://www.facebook.com/it.mait.delhi" class="social-link facebook" target="_blank">
+            <a href="https://www.facebook.com/it.mait.delhi" class="social-link facebook" target="_blank" rel="noopener noreferrer">
                 <div class="social-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                 </div>
                 <div class="platform-info">
                     <div class="platform-name">Facebook</div>
-                    <div class="platform-desc">Campus Life, Events & Community Updates</div>
+                    <div class="platform-desc">Campus Life, Events, Community Updates & Alumni Network</div>
                     <div class="follow-count">Join our campus community</div>
                 </div>
             </a>
 
-            <a href="https://www.instagram.com/it.mait.delhi?igsh=MTd3N2lmazhrbnA0Mg==" class="social-link instagram" target="_blank">
+            <a href="https://www.instagram.com/it.mait.delhi?igsh=MTd3N2lmazhrbnA0Mg==" class="social-link instagram" target="_blank" rel="noopener noreferrer">
                 <div class="social-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                     </svg>
                 </div>
                 <div class="platform-info">
                     <div class="platform-name">Instagram</div>
-                    <div class="platform-desc">Campus Photos, Stories & Student Life</div>
+                    <div class="platform-desc">Campus Photos, Stories, Student Life & Behind-the-Scenes</div>
                     <div class="follow-count">Follow for daily updates</div>
                 </div>
             </a>
         </div>
 
         <div class="cta-section">
-            <div class="cta-title">🚀 Stay Connected</div>
+            <div class="cta-title">🚀 Stay Connected & Engaged</div>
             <div class="cta-text">
-                Follow all our platforms to never miss important updates, events, and opportunities!
+                Follow all our platforms to never miss important announcements, exciting events, academic opportunities, 
+                and celebrate our collective achievements as one MAIT family!
             </div>
         </div>
     </div>
 
     <script>
-        // Add smooth entrance animation
+        // Enhanced entrance animation with staggered effects
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.querySelector('.container');
-            container.style.opacity = '0';
-            container.style.transform = 'translateY(30px)';
-            
-            setTimeout(() => {
-                container.style.transition = 'all 0.8s ease-out';
-                container.style.opacity = '1';
-                container.style.transform = 'translateY(0)';
-            }, 100);
-
-            // Add click tracking
             const socialLinks = document.querySelectorAll('.social-link');
+            
+            // Initial state
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(50px) scale(0.95)';
+            
+            socialLinks.forEach((link, index) => {
+                link.style.opacity = '0';
+                link.style.transform = 'translateX(-30px)';
+            });
+            
+            // Animate container entrance
+            setTimeout(() => {
+                container.style.transition = 'all 1s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0) scale(1)';
+            }, 200);
+            
+            // Staggered social link animations
+            socialLinks.forEach((link, index) => {
+                setTimeout(() => {
+                    link.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    link.style.opacity = '1';
+                    link.style.transform = 'translateX(0)';
+                }, 800 + (index * 150));
+            });
+
+            // Enhanced click interactions
             socialLinks.forEach(link => {
-                link.addEventListener('click', function() {
+                link.addEventListener('click', function(e) {
                     const platform = this.querySelector('.platform-name').textContent;
-                    console.log(`Clicked on ${platform}`);
                     
-                    // Add a subtle feedback effect
-                    this.style.transform = 'scale(0.95)';
+                    // Analytics tracking (if needed)
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'social_click', {
+                            'platform': platform,
+                            'page': 'social_media_landing'
+                        });
+                    }
+                    
+                    // Visual feedback
+                    this.style.transform = 'translateY(-8px) scale(0.98)';
                     setTimeout(() => {
                         this.style.transform = '';
-                    }, 150);
+                    }, 200);
                 });
+                
+                // Enhanced hover effects with sound trigger points
+                link.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    
+                    // Subtle vibration on mobile devices
+                    if ('vibrate' in navigator) {
+                        navigator.vibrate(50);
+                    }
+                });
+            });
+            
+            // Accessibility enhancements
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    document.body.classList.add('keyboard-navigation');
+                }
+            });
+            
+            document.addEventListener('mousedown', function() {
+                document.body.classList.remove('keyboard-navigation');
             });
         });
 
-        // Add hover sound effect (optional)
-        document.querySelectorAll('.social-link').forEach(link => {
-            link.addEventListener('mouseenter', function() {
-                this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        // Performance optimization: Lazy load background effects
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const backgroundObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'float 8s ease-in-out infinite';
+                }
             });
+        }, observerOptions);
+        
+        document.querySelectorAll('.gradient-orb').forEach(orb => {
+            backgroundObserver.observe(orb);
         });
+
+        // Add touch feedback for mobile devices
+        if ('ontouchstart' in window) {
+            socialLinks.forEach(link => {
+                link.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                link.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 100);
+                });
+            });
+        }
     </script>
 </body>
 </html>
